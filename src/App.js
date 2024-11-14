@@ -75,150 +75,6 @@ const App = () => {
     }
   };
 
-  // Load chart data based on selected disease
-  // const getChartData = async () => {
-  //   setLoading(true); // Set loading to true
-  //   const searchCondition = state.selectedDisease;
-  //   const patientFilePath = "/data/PatientData.json";
-  //   const conditionFilePath = "/data/ConditionData.json";
-
-  //   try {
-  //     const patientResponse = await axios.get(patientFilePath);
-  //     const conditionResponse = await axios.get(conditionFilePath);
-
-  //     const patientData = patientResponse.data.entry || [];
-  //     const conditionData = conditionResponse.data.entry || [];
-
-  //     // Initialize counters for analysis
-  //     const ageRanges = {
-  //       "0-15": 0,
-  //       "16-31": 0,
-  //       "32-47": 0,
-  //       "48-63": 0,
-  //       "64+": 0,
-  //     };
-  //     const genderCount = { Male: 0, Female: 0 };
-  //     const clinicalStatusCount = { Active: 0, Resolved: 0 };
-  //     const conditionTotalCount = {};
-  //     const conditionAgeDistribution = {
-  //       "0-15": 0,
-  //       "16-31": 0,
-  //       "32-47": 0,
-  //       "48-63": 0,
-  //       "64+": 0,
-  //     };
-  //     const conditionGenderDistribution = { Male: 0, Female: 0 };
-  //     const conditionClinicalStatus = { Active: 0, Resolved: 0 };
-  //     const yearDistribution = {}; // For year analysis
-
-  //     // Filter conditions based on search term if provided
-  //     const filteredConditions = searchCondition
-  //       ? conditionData.filter((entry) => {
-  //           const conditionDisplay =
-  //             entry?.resource?.code?.coding?.[0]?.display || "";
-  //           return conditionDisplay
-  //             .toLowerCase()
-  //             .includes(searchCondition.toLowerCase());
-  //         })
-  //       : conditionData;
-
-  //     if (filteredConditions.length === 0) {
-  //       toast.warn("No conditions found matching the search term");
-  //       setLoading(false); // Set loading to false
-  //       return;
-  //     }
-
-  //     // Process each condition entry
-  //     filteredConditions.forEach((entry) => {
-  //       const condition = entry.resource;
-  //       const clinicalStatus =
-  //         condition.clinicalStatus?.coding?.[0]?.display || "Healthy";
-  //       const patientId = condition.subject?.reference.split("/")[1];
-
-  //       // Update clinical status counts
-  //       clinicalStatusCount[clinicalStatus] =
-  //         (clinicalStatusCount[clinicalStatus] || 0) + 1;
-  //       conditionClinicalStatus[clinicalStatus]++;
-
-  //       // Find corresponding patient data
-  //       const patient = patientData.find((p) => p.resource.id === patientId);
-  //       if (patient) {
-  //         const birthDate = patient.resource.birthDate || null;
-  //         const gender = patient.resource.gender || null;
-  //         const year = patient.resource.birthDate
-  //           ? new Date(patient.resource.birthDate).getFullYear()
-  //           : null;
-
-  //         // Calculate and categorize age range
-  //         if (birthDate) {
-  //           const age = calculateAge(birthDate);
-  //           const ageRange =
-  //             age <= 15
-  //               ? "0-15"
-  //               : age <= 31
-  //               ? "16-31"
-  //               : age <= 47
-  //               ? "32-47"
-  //               : age <= 63
-  //               ? "48-63"
-  //               : "64+";
-  //           ageRanges[ageRange]++;
-  //           conditionAgeDistribution[ageRange]++;
-  //         }
-
-  //         // Categorize gender
-  //         if (gender) {
-  //           genderCount[gender.charAt(0).toUpperCase() + gender.slice(1)]++;
-  //           conditionGenderDistribution[
-  //             gender.charAt(0).toUpperCase() + gender.slice(1)
-  //           ]++;
-  //         }
-
-  //         // Track year of birth
-  //         if (year) {
-  //           yearDistribution[year] = (yearDistribution[year] || 0) + 1;
-  //         }
-  //       }
-  //     });
-
-  //     // Prepare data for charts
-  //     const ageChartData = Object.keys(ageRanges).map((label) => ({
-  //       label,
-  //       value: ageRanges[label],
-  //     }));
-  //     const genderChartData = Object.keys(genderCount).map((label) => ({
-  //       label,
-  //       value: genderCount[label],
-  //     }));
-  //     const clinicalStatusChartData = Object.keys(clinicalStatusCount).map(
-  //       (label) => ({ label, value: clinicalStatusCount[label] })
-  //     );
-  //     const yearChartData = Object.keys(yearDistribution).map((year) => ({
-  //       label: year,
-  //       value: yearDistribution[year],
-  //     }));
-
-  //     // Dispatch data to the state
-  //     dispatch({
-  //       type: "SET_CHART_DATA",
-  //       payload: {
-  //         age: ageChartData,
-  //         gender: genderChartData,
-  //         clinicalStatus: clinicalStatusChartData,
-  //         year: yearChartData, // Include year data in payload
-  //       },
-  //     });
-
-  //     toast.success("Chart data loaded successfully."); // Notify on successful load
-  //   } catch (error) {
-  //     console.error("Error loading chart data:", error);
-  //     toast.error("Failed to load chart data.");
-  //   } finally {
-  //     setLoading(false); // Always set loading to false after the try/catch
-  //   }
-  // };
-
-  // Load chart data based on selected disease
   const getChartData = async () => {
     setLoading(true); // Set loading to true
     const searchCondition = state.selectedDisease;
@@ -452,6 +308,21 @@ const App = () => {
         <ToastContainer />
         <h1 className="text-3xl font-bold mb-8 text-center">EraStats</h1>
 
+        <div className="w-[50rem]">
+          <p className="w-full">
+            EraStats is an analytical tool designed to help users gain insights
+            into the prevalence of various medical conditions over time. Users
+            can select specific health conditions, such as depression or
+            diabetes, and view statistics broken down by age, gender, and
+            clinical status. This data-driven approach provides a comprehensive
+            understanding of how different factors influence the incidence of
+            diseases. EraStats is ideal for healthcare professionals,
+            researchers, and individuals interested in historical and
+            demographic trends in healthcare, as it allows them to identify
+            patterns and potentially make data-informed decisions or predictions
+            for public health initiatives.
+          </p>
+        </div>
         <div className="mb-4">
           <select
             onChange={(e) =>
@@ -507,6 +378,13 @@ const App = () => {
             Clinical Status
           </button>
         </div>
+
+        {state.selectedDisease && (
+          <h2 className="font-bold text-center text-3xl my-10">
+            {" "}
+            {state.selectedDisease} analysis
+          </h2>
+        )}
 
         {loading ? (
           <div className="flex justify-center items-center h-full">
