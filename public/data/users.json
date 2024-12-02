@@ -1,52 +1,12 @@
 [
-    {
-        "id": 1,
-        "firstname": "Dickson Awudu",
-        "middlename": "A.",
-        "lastname": "Awudu",
-        "email": "john.doe@example.com",
-        "phone": "1234567890",
-        "gender": "Male",
-        "password": "password123"
-    },
-    {
-        "id": 2,
-        "firstname": "Jane",
-        "middlename": "B.",
-        "lastname": "Smith",
-        "email": "jane.smith@example.com",
-        "phone": "0987654321",
-        "gender": "Female",
-        "password": "password123"
-    },
-    {
-        "id": 3,
-        "firstname": "Emily",
-        "middlename": "C.",
-        "lastname": "Johnson",
-        "email": "emily.johnson@example.com",
-        "phone": "1122334455",
-        "gender": "Female",
-        "password": "password123"
-    },
-    {
-        "id": 4,
-        "firstname": "Michael",
-        "middlename": "D.",
-        "lastname": "Brown",
-        "email": "michael.brown@example.com",
-        "phone": "6677889900",
-        "gender": "Male",
-        "password": "password123"
-    },
-    {
-        "id": 5,
-        "firstname": "Sarah",
-        "middlename": "E.",
-        "lastname": "Davis",
-        "email": "sarah.davis@example.com",
-        "phone": "4455667788",
-        "gender": "Female",
-        "password": "password123"
-    }
+  {
+    "id": 1,
+    "firstname": "Hasin ",
+    "middlename": "",
+    "lastname": "Arman",
+    "email": "hasinarman5@gmail.com",
+    "phone": "1234567890",
+    "gender": "Male",
+    "password": "password123"
+  }
 ]
