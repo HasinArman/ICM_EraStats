@@ -81,10 +81,10 @@
 
 
 ## Register Page
-https://github.com/HasinArman/ICM_EraStats/blob/main/Screenshot%20(35).png
+![Alt text](https://github.com/HasinArman/ICM_EraStats/blob/main/Screenshot%20(35).png)
 
 ## Login Page
-https://github.com/HasinArman/ICM_EraStats/blob/main/Screenshot%20(34).png
+![Alt text](https://github.com/HasinArman/ICM_EraStats/blob/main/Screenshot%20(34).png)
 
 
 
