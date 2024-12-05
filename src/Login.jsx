@@ -3,6 +3,7 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
 
 import axios from "axios";
 
@@ -25,8 +26,8 @@ const Login = () => {
         Cookies.set("auth_token", token, { expires: 1 });
         toast.success("Login successful!");
         setTimeout(() => {
-            window.location.href = "/"; // Hard redirect to / after a short delay
-          }, 1000);
+          window.location.href = "/"; // Hard redirect to / after a short delay
+        }, 1000);
       } else {
         toast.error("Invalid email or password!");
       }
@@ -66,6 +67,15 @@ const Login = () => {
         >
           Login
         </button>
+
+        <div className="text-center mt-4">
+          <p>
+            I don't have an account?{" "}
+            <Link to="/register" className="text-blue-500 underline">
+              Register here
+            </Link>
+          </p>
+        </div>
       </form>
       <ToastContainer />
     </div>

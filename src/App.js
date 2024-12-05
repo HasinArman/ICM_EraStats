@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Login from "./Login";
 import Dashboard from "./Dashboard";
 import Header from "./components/Header";
+import RegisterPage from "./RegisterPage";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -65,6 +66,7 @@ const App = () => {
         ) : (
           <>
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<RegisterPage />} />
             <Route path="*" element={<Navigate to="/login" />} />
           </>
         )}
