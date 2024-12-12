@@ -50,10 +50,7 @@ const calculateAge = (birthDate) => {
 };
 
 const Dashboard = () => {
-   
   const [user, setUser] = useState(null);
-  
-
 
   const [state, dispatch] = useReducer(chartReducer, initialState);
   const [diseases, setDiseases] = useState([]);
@@ -76,7 +73,9 @@ const Dashboard = () => {
       setDiseases(uniqueConditions);
     } catch (error) {
       console.error("Error loading conditions:", error);
-      toast.error("Failed to load conditions.");
+      toast.error("Failed to load conditions.", {
+        autoClose: 3000,
+      });
     }
   };
 
@@ -127,7 +126,9 @@ const Dashboard = () => {
         : conditionData;
 
       if (filteredConditions.length === 0) {
-        toast.warn("No conditions found matching the search term");
+        // toast.warn("No conditions found matching the search term", {
+        //   autoClose: 3000, // Automatically closes after 3 seconds
+        // });
         setLoading(false); // Set loading to false
         return;
       }
@@ -222,10 +223,14 @@ const Dashboard = () => {
         },
       });
 
-      toast.success("Chart data loaded successfully."); // Notify on successful load
+      // toast.success("Chart data loaded successfully.", {
+      //   autoClose: 3000, // Automatically closes after 3 seconds
+      // }); // Notify on successful load
     } catch (error) {
       console.error("Error loading chart data:", error);
-      toast.error("Failed to load chart data.");
+      // toast.error("Failed to load chart data.", {
+      //   autoClose: 3000, // Automatically closes after 3 seconds
+      // });
     } finally {
       setLoading(false); // Always set loading to false after the try/catch
     }

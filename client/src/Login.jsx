@@ -28,6 +28,8 @@ const Login = () => {
         password,
       });
 
+      console.log(response)
+
       if (response.data.status) {
         const token = response.data.token;
         dispatch({ type: "SET_USER", payload: response.data.user });

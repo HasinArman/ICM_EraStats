@@ -44,7 +44,7 @@ exports.login = async (req, res) => {
         }
 
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        return res.status(200).json({ status: true, message: "Login successful", token, user: { id: user._id, email: user.email } });
+        return res.status(200).json({ status: true, message: "Login successful", token, user: { id: user._id, email: user.email, firstName: user.firstName, middleName: user.middleName, lastName: user.lastName, phone: user.phone, gender: user.gender } });
     } catch (error) {
         return res.status(200).json({ status: false, error: error.message, message: "Internal Server Error" });
     }
