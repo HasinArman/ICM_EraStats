@@ -75,11 +75,6 @@
 
 
 
-
-
-### The registration functionality is currently not operational because I did not integrate the Node.js backend to handle saving the data. If I were to add the backend, it would not work in the Codespace environment, as it does not fully support server-side Node.js execution in this setup. However, the login functionality works because it retrieves user data directly from a static JSON file instead of relying on a backend server.
-
-
 ## Register Page
 ![Alt text](https://github.com/HasinArman/ICM_EraStats/blob/main/client/Screenshot%20(35).png)
 
