@@ -81,35 +81,35 @@
 
 
 ## Register Page
-![Alt text](https://github.com/HasinArman/ICM_EraStats/client/blob/main/Screenshot%20(35).png)
+![Alt text](https://github.com/HasinArman/ICM_EraStats/blob/main/client/Screenshot%20(35).png)
 
 ## Login Page
-![Alt text](https://github.com/HasinArman/ICM_EraStats/blob/client/main/Screenshot%20(34).png)
+![Alt text](https://github.com/HasinArman/ICM_EraStats/blob/main/client/Screenshot%20(34).png)
 
 
 
 
 ## Home Page
 
-![Alt text](https://github.com/HasinArman/ICM_EraStats/client/blob/main/Screenshot%20(203).png)
+![Alt text](https://github.com/HasinArman/ICM_EraStats/blob/main/client/Screenshot%20(203).png)
 
 
 ## Select Condition 
 
-![Alt text](https://github.com/HasinArman/ICM_EraStats/client/blob/main/Screenshot%20(204).png)
+![Alt text](https://github.com/HasinArman/ICM_EraStats/blob/main/client/Screenshot%20(204).png)
 
 ## AllData Analysis in Line Chart
 
-![Alt text](https://github.com/HasinArman/ICM_EraStats/client/blob/main/Screenshot%20(205).png)
+![Alt text](https://github.com/HasinArman/ICM_EraStats/blob/main/client/Screenshot%20(205).png)
 
 ## Age Analysis in Bar Chart
 
-![Alt text](https://github.com/HasinArman/ICM_EraStats/client/blob/main/Screenshot%20(206).png)
+![Alt text](https://github.com/HasinArman/ICM_EraStats/blob/main/client/Screenshot%20(206).png)
 
 ## Gender Analysis in Pie Chart
 
-![Alt text](https://github.com/HasinArman/ICM_EraStats/client/blob/main/Screenshot%20(207).png)
+![Alt text](https://github.com/HasinArman/ICM_EraStats/blob/main/client/Screenshot%20(207).png)
 
 ## Clinic Stat Analysis in Pie Chart
 
-![Alt text](https://github.com/HasinArman/ICM_EraStats/client/blob/main/Screenshot%20(208).png)
+![Alt text](https://github.com/HasinArman/ICM_EraStats/blob/main/client/Screenshot%20(208).png)
