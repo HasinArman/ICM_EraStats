@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import * as d3 from "d3";
+import io from "socket.io-client"; // Import socket.io-client for WebSocket
 
 const PatientDashboard = () => {
   const [patientIds, setPatientIds] = useState([]);
@@ -9,12 +10,15 @@ const PatientDashboard = () => {
   const [loading, setLoading] = useState(false);
   const [loadingPatientIds, setLoadingPatientIds] = useState(true); // New loading state
 
+  const chartRef = useRef(null); // Reference to the chart container
+
+  // WebSocket setup: connect to the backend server
+  const socket = useRef(null); // Socket reference
+
   const patientListEndpoint =
     "https://cuddly-tribble-v944gvg6rxghx9v6-5000.app.github.dev/api/chronicdisease/chronic-disease-patients";
   const patientDataEndpoint =
     "https://cuddly-tribble-v944gvg6rxghx9v6-5000.app.github.dev/api/chronicdisease/getPatientData/";
-
-  const chartRef = useRef(null); // Reference to the chart container
 
   // Fetch patient IDs
   useEffect(() => {
@@ -46,7 +50,7 @@ const PatientDashboard = () => {
   useEffect(() => {
     if (patientData && chartRef.current) {
       const { observationsVitalSigns } = patientData;
-      
+
       if (observationsVitalSigns && observationsVitalSigns.length > 0) {
         // Set dimensions of the chart
         const margin = { top: 20, right: 30, bottom: 40, left: 40 };
@@ -101,6 +105,25 @@ const PatientDashboard = () => {
       }
     }
   }, [patientData]);
+
+  // WebSocket: Listen for real-time updates
+  useEffect(() => {
+    // Create the WebSocket connection only once when the component is mounted
+    socket.current = io("https://cuddly-tribble-v944gvg6rxghx9v6-3000.app.github.dev");
+
+    // Listen for patient data updates from the backend
+    socket.current.on("patientDataUpdate", (updatedPatientData) => {
+      if (updatedPatientData.patientId === selectedPatientId) {
+        setPatientData(updatedPatientData);
+        console.log("Received real-time update for patient data:", updatedPatientData);
+      }
+    });
+
+    return () => {
+      // Clean up the socket connection when the component unmounts
+      socket.current.disconnect();
+    };
+  }, [selectedPatientId]);
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
@@ -168,15 +191,15 @@ const PatientDashboard = () => {
             <ul>
               {patientData.medications.map((medication, index) => (
                 <>
-                <li key={index}>
-                  <strong>{medication.name}</strong> - Medication: {medication.medication || "N/A"}
-                </li>
-                <li key={index}>
-                  <strong>{medication.name}</strong> - Dosage: {medication.dosageInstruction || "N/A"}
-                </li>
-                <li key={index}>
-                  <strong>{medication.name}</strong> - status: {medication.status || "N/A"}
-                </li>
+                  <li key={index}>
+                    <strong>{medication.name}</strong> - Medication: {medication.medication || "N/A"}
+                  </li>
+                  <li key={index}>
+                    <strong>{medication.name}</strong> - Dosage: {medication.dosageInstruction || "N/A"}
+                  </li>
+                  <li key={index}>
+                    <strong>{medication.name}</strong> - status: {medication.status || "N/A"}
+                  </li>
                 </>
               ))}
             </ul>
