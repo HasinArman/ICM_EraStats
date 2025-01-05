@@ -7,6 +7,7 @@ const PatientDashboard = () => {
   const [selectedPatientId, setSelectedPatientId] = useState(null);
   const [patientData, setPatientData] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [loadingPatientIds, setLoadingPatientIds] = useState(true); // New loading state
 
   const patientListEndpoint =
     "http://localhost:5000/api/chronicdisease/chronic-disease-patients";
@@ -17,10 +18,12 @@ const PatientDashboard = () => {
 
   // Fetch patient IDs
   useEffect(() => {
+    setLoadingPatientIds(true); // Set loading state to true when fetching IDs
     axios
       .get(patientListEndpoint)
       .then((response) => setPatientIds(response.data.patientIds || []))
-      .catch((error) => console.error("Error fetching patient IDs:", error));
+      .catch((error) => console.error("Error fetching patient IDs:", error))
+      .finally(() => setLoadingPatientIds(false)); // Set loading state to false after data is fetched
   }, []);
 
   // Fetch patient data on ID change
@@ -112,15 +115,19 @@ const PatientDashboard = () => {
           onChange={(e) => setSelectedPatientId(e.target.value)}
         >
           <option value="">Select a Patient</option>
-          {patientIds.map((id) => (
-            <option key={id} value={id}>
-              Patient ID: {id}
-            </option>
-          ))}
+          {loadingPatientIds ? (
+            <option>Loading...</option> // Show loading message while fetching IDs
+          ) : (
+            patientIds.map((id) => (
+              <option key={id} value={id}>
+                Patient ID: {id}
+              </option>
+            ))
+          )}
         </select>
       </div>
 
-      {/* Loading Spinner */}
+      {/* Loading Spinner for Patient Data */}
       {loading ? (
         <div className="flex justify-center items-center">
           <div className="w-8 h-8 border-4 border-blue-500 border-solid rounded-full animate-spin border-t-transparent"></div>

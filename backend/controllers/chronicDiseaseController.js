@@ -18,6 +18,7 @@ const fetchFHIRResource = async (url, retries = 3, delay = 1000) => {
 };
 
 exports.chronic_disease_patients = async (req, res) => {
+    console.log("api in");
   try {
     const url = `${FHIR_BASE_URL}/Condition?clinical-status=active`;
     const response = await fetchFHIRResource(url);
