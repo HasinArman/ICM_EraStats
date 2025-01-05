@@ -9,9 +9,9 @@ const PatientDashboard = () => {
   const [loading, setLoading] = useState(false);
 
   const patientListEndpoint =
-    "http://localhost:5000/api/chronicdisease/chronic-disease-patients";
+    "https://cuddly-tribble-v944gvg6rxghx9v6-5000.app.github.dev/api/chronicdisease/chronic-disease-patients";
   const patientDataEndpoint =
-    "http://localhost:5000/api/chronicdisease/getPatientData/";
+    "https://cuddly-tribble-v944gvg6rxghx9v6-5000.app.github.dev/api/chronicdisease/getPatientData/";
 
   const chartRef = useRef(null); // Reference to the chart container
 
