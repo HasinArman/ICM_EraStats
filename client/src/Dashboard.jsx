@@ -15,7 +15,7 @@ const initialState = {
   selectedDisease: "",
   activeTab: "AllData",
   chartData: {},
-};
+}; 
 
 // Reducer function
 const chartReducer = (state, action) => {
