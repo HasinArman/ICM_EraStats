@@ -1,77 +1,107 @@
-import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
-import * as d3 from "d3";
-import io from "socket.io-client"; // Import socket.io-client for WebSocket
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import * as d3 from 'd3';
 
 const PatientDashboard = () => {
   const [patientIds, setPatientIds] = useState([]);
   const [selectedPatientId, setSelectedPatientId] = useState(null);
   const [patientData, setPatientData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [loadingPatientIds, setLoadingPatientIds] = useState(true); // New loading state
+  const [loadingPatientIds, setLoadingPatientIds] = useState(true);
 
-  const chartRef = useRef(null); // Reference to the chart container
+  const chartRef = React.createRef();
 
-  // WebSocket setup: connect to the backend server
-  const socket = useRef(null); // Socket reference
+  const FHIR_BASE_URL = 'https://hapi.fhir.org/baseR4';
 
-  const patientListEndpoint =
-    "https://cuddly-tribble-v944gvg6rxghx9v6-5000.app.github.dev/api/chronicdisease/chronic-disease-patients";
-  const patientDataEndpoint =
-    "https://cuddly-tribble-v944gvg6rxghx9v6-5000.app.github.dev/api/chronicdisease/getPatientData/";
+  const fetchFHIRResource = async (url) => {
+    try {
+      const response = await axios.get(url, {
+        headers: {
+          'Content-Type': 'application/fhir+json',
+          'Accept': 'application/fhir+json',
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error(`Error fetching ${url}:`, error.message);
+      return null;
+    }
+  };
 
-  // Fetch patient IDs
   useEffect(() => {
-    setLoadingPatientIds(true); // Set loading state to true when fetching IDs
-    axios
-      .get(patientListEndpoint)
-      .then((response) => setPatientIds(response.data.patientIds || []))
-      .catch((error) => console.error("Error fetching patient IDs:", error))
-      .finally(() => setLoadingPatientIds(false)); // Set loading state to false after data is fetched
+    setLoadingPatientIds(true);
+    fetchFHIRResource(`${FHIR_BASE_URL}/Condition?clinical-status=active`)
+      .then((response) => {
+        const patientIds = response.entry.map((entry) => entry.resource.subject.reference.split('/')[1]);
+        setPatientIds(patientIds);
+      })
+      .catch((error) => console.error('Error fetching patient IDs:', error))
+      .finally(() => setLoadingPatientIds(false));
   }, []);
 
-  // Fetch patient data on ID change
   useEffect(() => {
     if (selectedPatientId) {
       setLoading(true);
       setPatientData(null);
-      axios
-        .get(`${patientDataEndpoint}${selectedPatientId}`)
+      fetchFHIRResource(`${FHIR_BASE_URL}/Patient/${selectedPatientId}`)
         .then((response) => {
-          console.log("Fetched patient data:", response.data);
-          setPatientData(response.data);
+          const patientData = response;
+          fetchFHIRResource(`${FHIR_BASE_URL}/Condition?patient=${selectedPatientId}&clinical-status=active`)
+            .then((response) => {
+              patientData.chronicConditions = response.entry.map((entry) => ({
+                conditionCode: entry.resource.code.text,
+                conditionStatus: entry.resource.clinicalStatus.text,
+                onsetDate: entry.resource.onsetDateTime,
+              }));
+              fetchFHIRResource(`${FHIR_BASE_URL}/MedicationRequest?patient=${selectedPatientId}&status=active`)
+                .then((response) => {
+                  patientData.medications = response.entry.map((entry) => ({
+                    medication: entry.resource.medicationCodeableConcept.text,
+                    dosageInstruction: entry.resource.dosageInstruction[0].text,
+                    status: entry.resource.status,
+                  }));
+                  fetchFHIRResource(`${FHIR_BASE_URL}/Observation?patient=${selectedPatientId}&category=vital-signs`)
+                    .then((response) => {
+                      patientData.observationsVitalSigns = response.entry.map((entry) => ({
+                        observationCode: entry.resource.code.text,
+                        value: entry.resource.valueQuantity.value,
+                        unit: entry.resource.valueQuantity.unit,
+                        date: entry.resource.effectiveDateTime,
+                      }));
+                      setPatientData(patientData);
+                    })
+                    .catch((error) => console.error('Error fetching vital signs:', error))
+                    .finally(() => setLoading(false));
+                })
+                .catch((error) => console.error('Error fetching medications:', error));
+            })
+            .catch((error) => console.error('Error fetching chronic conditions:', error));
         })
-        .catch((error) => console.error("Error fetching patient data:", error))
+        .catch((error) => console.error('Error fetching patient data:', error))
         .finally(() => setLoading(false));
     }
   }, [selectedPatientId]);
 
-  // D3 chart setup
   useEffect(() => {
     if (patientData && chartRef.current) {
       const { observationsVitalSigns } = patientData;
 
       if (observationsVitalSigns && observationsVitalSigns.length > 0) {
-        // Set dimensions of the chart
         const margin = { top: 20, right: 30, bottom: 40, left: 40 };
         const width = 800 - margin.left - margin.right;
         const height = 400 - margin.top - margin.bottom;
 
-        // Create an SVG container
         const svg = d3
           .select(chartRef.current)
-          .append("svg")
-          .attr("width", width + margin.left + margin.right)
-          .attr("height", height + margin.top + margin.bottom)
-          .append("g")
-          .attr("transform", `translate(${margin.left},${margin.top})`);
+          .append('svg')
+          .attr('width', width + margin.left + margin.right)
+          .attr('height', height + margin.top + margin.bottom)
+          .append('g')
+          .attr('transform', `translate(${margin.left},${margin.top})`);
 
-        // Set up scales
         const x = d3
           .scaleTime()
-          .domain(
-            d3.extent(observationsVitalSigns, (d) => new Date(d.date))
-          )
+          .domain(d3.extent(observationsVitalSigns, (d) => new Date(d.date)))
           .range([0, width]);
 
         const y = d3
@@ -79,24 +109,25 @@ const PatientDashboard = () => {
           .domain([0, d3.max(observationsVitalSigns, (d) => d.value)])
           .range([height, 0]);
 
-        // Add X axis
         svg
-          .append("g")
-          .attr("transform", `translate(0,${height})`)
+          .append('g')
+          .attr('transform', `translate(0,${height})`)
           .call(d3.axisBottom(x));
 
-        // Add Y axis
-        svg.append("g").call(d3.axisLeft(y));
-
-        // Add the line
         svg
-          .append("path")
+          .append('g')
+          .call(d3.axisLeft(y));
+
+        svg
+          .selectAll('.line')
           .data([observationsVitalSigns])
-          .attr("fill", "none")
-          .attr("stroke", "steelblue")
-          .attr("stroke-width", 1.5)
+          .enter()
+          .append('path')
+          .attr('fill', 'none')
+          .attr('stroke', 'steelblue')
+          .attr('stroke-width', 2)
           .attr(
-            "d",
+            'd',
             d3
               .line()
               .x((d) => x(new Date(d.date)))
@@ -105,25 +136,6 @@ const PatientDashboard = () => {
       }
     }
   }, [patientData]);
-
-  // WebSocket: Listen for real-time updates
-  useEffect(() => {
-    // Create the WebSocket connection only once when the component is mounted
-    socket.current = io("https://cuddly-tribble-v944gvg6rxghx9v6-3000.app.github.dev");
-
-    // Listen for patient data updates from the backend
-    socket.current.on("patientDataUpdate", (updatedPatientData) => {
-      if (updatedPatientData.patientId === selectedPatientId) {
-        setPatientData(updatedPatientData);
-        console.log("Received real-time update for patient data:", updatedPatientData);
-      }
-    });
-
-    return () => {
-      // Clean up the socket connection when the component unmounts
-      socket.current.disconnect();
-    };
-  }, [selectedPatientId]);
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
@@ -190,17 +202,11 @@ const PatientDashboard = () => {
           {patientData.medications?.length > 0 ? (
             <ul>
               {patientData.medications.map((medication, index) => (
-                <>
-                  <li key={index}>
-                    <strong>{medication.name}</strong> - Medication: {medication.medication || "N/A"}
-                  </li>
-                  <li key={index}>
-                    <strong>{medication.name}</strong> - Dosage: {medication.dosageInstruction || "N/A"}
-                  </li>
-                  <li key={index}>
-                    <strong>{medication.name}</strong> - status: {medication.status || "N/A"}
-                  </li>
-                </>
+                <div key={index}>
+                  <p><strong>{medication.name}</strong> - Medication: {medication.medication || "N/A"}</p>
+                  <p><strong>{medication.name}</strong> - Dosage: {medication.dosageInstruction || "N/A"}</p>
+                  <p><strong>{medication.name}</strong> - Status: {medication.status || "N/A"}</p>
+                </div>
               ))}
             </ul>
           ) : (
