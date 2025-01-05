@@ -23,11 +23,7 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 app.use(express.json());
 
-app.use(cors({
-  origin: 'https://cuddly-tribble-v944gvg6rxghx9v6-3000.app.github.dev', // your frontend's domain
-  methods: ['GET', 'POST'], // Allowed HTTP methods
-  credentials: true // Allow cookies to be sent with requests
-}));
+app.use(cors());
 
 // Routes
 app.use("/api/auth", authRoutes);
