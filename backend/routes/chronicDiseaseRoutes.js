@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const {
-  chronic_disease_patients,
-  getPatientData,
+  getPatientInfo,
+  getPatientsWithAllergies,
 } = require("../controllers/chronicDiseaseController");
 
-router.get("/chronic-disease-patients", chronic_disease_patients);
-router.get("/getPatientData/:id", getPatientData);
+router.get("/chronic-disease-patients", getPatientsWithAllergies);
+router.get("/getPatientData/:patientId", getPatientInfo);
 
 module.exports = router;

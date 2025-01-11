@@ -1,0 +1,206 @@
+[
+  [],
+  [],
+  [
+    {
+      "id": "39415",
+      "status": "active",
+      "subject": "Patient/1200",
+      "authoredOn": "2015-03-01"
+    },
+    {
+      "id": "1470399",
+      "status": "active",
+      "subject": "Patient/1200",
+      "authoredOn": "2021-08-15"
+    },
+    {
+      "id": "1599298",
+      "status": "active",
+      "subject": "Patient/1200",
+      "authoredOn": "2021-03-20"
+    },
+    {
+      "id": "45711788",
+      "status": "active",
+      "medicationCodeableConcept": {
+        "coding": [
+          {
+            "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            "code": "308047",
+            "display": "Advil 400 MG"
+          }
+        ],
+        "text": "Advil 400mg"
+      },
+      "subject": "Patient/1200",
+      "authoredOn": null
+    }
+  ],
+  [
+    {
+      "id": "30097",
+      "status": "stopped",
+      "subject": "Patient/1208",
+      "authoredOn": "2015-01-15"
+    },
+    {
+      "id": "7148327",
+      "status": "active",
+      "subject": "Patient/1208",
+      "authoredOn": "2015-01-15"
+    }
+  ],
+  [],
+  [],
+  [
+    {
+      "id": "45711787",
+      "status": "active",
+      "medicationCodeableConcept": {
+        "coding": [
+          {
+            "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            "code": "308047",
+            "display": "Advil 400 MG"
+          }
+        ],
+        "text": "Advil 400mg"
+      },
+      "subject": "Patient/1202",
+      "authoredOn": null
+    },
+    {
+      "id": "45711896",
+      "status": "active",
+      "medicationCodeableConcept": {
+        "coding": [
+          {
+            "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            "code": "308047",
+            "display": "Advil 400 MG"
+          }
+        ],
+        "text": "Advil 400mg"
+      },
+      "subject": "Patient/1202",
+      "authoredOn": null
+    },
+    {
+      "id": "45711958",
+      "status": "active",
+      "medicationCodeableConcept": {
+        "coding": [
+          {
+            "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            "code": "308047",
+            "display": "Advil 400 MG"
+          }
+        ],
+        "text": "Advil 400mg"
+      },
+      "subject": "Patient/1202",
+      "authoredOn": null
+    },
+    {
+      "id": "45711992",
+      "status": "active",
+      "medicationCodeableConcept": {
+        "coding": [
+          {
+            "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            "code": "308047",
+            "display": "Advil 400 MG"
+          }
+        ],
+        "text": "Advil 400mg"
+      },
+      "subject": "Patient/1202",
+      "authoredOn": null
+    }
+  ],
+  [
+    {
+      "id": "45711787",
+      "status": "active",
+      "medicationCodeableConcept": {
+        "coding": [
+          {
+            "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            "code": "308047",
+            "display": "Advil 400 MG"
+          }
+        ],
+        "text": "Advil 400mg"
+      },
+      "subject": "Patient/1202",
+      "authoredOn": null
+    },
+    {
+      "id": "45711896",
+      "status": "active",
+      "medicationCodeableConcept": {
+        "coding": [
+          {
+            "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            "code": "308047",
+            "display": "Advil 400 MG"
+          }
+        ],
+        "text": "Advil 400mg"
+      },
+      "subject": "Patient/1202",
+      "authoredOn": null
+    },
+    {
+      "id": "45711958",
+      "status": "active",
+      "medicationCodeableConcept": {
+        "coding": [
+          {
+            "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            "code": "308047",
+            "display": "Advil 400 MG"
+          }
+        ],
+        "text": "Advil 400mg"
+      },
+      "subject": "Patient/1202",
+      "authoredOn": null
+    },
+    {
+      "id": "45711992",
+      "status": "active",
+      "medicationCodeableConcept": {
+        "coding": [
+          {
+            "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            "code": "308047",
+            "display": "Advil 400 MG"
+          }
+        ],
+        "text": "Advil 400mg"
+      },
+      "subject": "Patient/1202",
+      "authoredOn": null
+    }
+  ],
+  [],
+  [],
+  [],
+  [],
+  [
+    {
+      "id": "30097",
+      "status": "stopped",
+      "subject": "Patient/1208",
+      "authoredOn": "2015-01-15"
+    },
+    {
+      "id": "7148327",
+      "status": "active",
+      "subject": "Patient/1208",
+      "authoredOn": "2015-01-15"
+    }
+  ]
+]

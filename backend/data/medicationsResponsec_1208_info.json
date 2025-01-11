@@ -1,0 +1,261 @@
+{
+  "resourceType": "Bundle",
+  "id": "f9b4cb59-ab26-4540-9b72-ac90890bc299",
+  "meta": {
+    "lastUpdated": "2025-01-11T16:15:17.455+00:00"
+  },
+  "type": "searchset",
+  "total": 2,
+  "link": [
+    {
+      "relation": "self",
+      "url": "https://hapi.fhir.org/baseR4/MedicationRequest?patient=1208"
+    }
+  ],
+  "entry": [
+    {
+      "fullUrl": "https://hapi.fhir.org/baseR4/MedicationRequest/30097",
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "30097",
+        "meta": {
+          "versionId": "5",
+          "lastUpdated": "2023-01-08T06:53:23.204+00:00",
+          "source": "#1J1wlXTd37BVA5p7"
+        },
+        "contained": [
+          {
+            "resourceType": "Medication",
+            "id": "med0309",
+            "text": {
+              "status": "generated",
+              "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><div class=\"hapiHeaderText\"> Tylenol PM </div></div>"
+            },
+            "code": {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/sid/ndc",
+                  "code": "50580-506-02",
+                  "display": "Tylenol PM"
+                }
+              ]
+            }
+          }
+        ],
+        "identifier": [
+          {
+            "use": "official",
+            "system": "http://www.bmc.nl/portal/prescriptions",
+            "value": "12345689"
+          }
+        ],
+        "status": "stopped",
+        "intent": "order",
+        "medicationReference": {
+          "reference": "#med0309"
+        },
+        "subject": {
+          "reference": "Patient/1208",
+          "display": "Roshni Sahu"
+        },
+        "encounter": {
+          "reference": "Encounter/43",
+          "display": "encounter who leads to this prescription"
+        },
+        "authoredOn": "2015-01-15",
+        "requester": {
+          "reference": "Practitioner/1058",
+          "display": "Guru Practitioner"
+        },
+        "dosageInstruction": [
+          {
+            "sequence": 1,
+            "text": "Take 1-2 tablets once daily at bedtime as needed for restless legs",
+            "additionalInstruction": [
+              {
+                "text": "Take at bedtime"
+              }
+            ],
+            "timing": {
+              "repeat": {
+                "frequency": 1,
+                "period": 1,
+                "periodUnit": "d"
+              }
+            },
+            "asNeededCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "32914008",
+                  "display": "Restless Legs"
+                }
+              ]
+            },
+            "route": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "26643006",
+                  "display": "Oral Route"
+                }
+              ]
+            },
+            "doseAndRate": [
+              {
+                "type": {
+                  "coding": [
+                    {
+                      "system": "http://terminology.hl7.org/CodeSystem/dose-rate-type",
+                      "code": "ordered",
+                      "display": "Ordered"
+                    }
+                  ]
+                },
+                "doseRange": {
+                  "low": {
+                    "value": 1,
+                    "unit": "TAB",
+                    "system": "http://terminology.hl7.org/CodeSystem/v3-orderableDrugForm",
+                    "code": "TAB"
+                  },
+                  "high": {
+                    "value": 2,
+                    "unit": "TAB",
+                    "system": "http://terminology.hl7.org/CodeSystem/v3-orderableDrugForm",
+                    "code": "TAB"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://hapi.fhir.org/baseR4/MedicationRequest/7148327",
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "7148327",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2022-11-23T19:30:23.815+00:00",
+          "source": "#Jr1NZRtaBcs4ty5p"
+        },
+        "contained": [
+          {
+            "resourceType": "Medication",
+            "id": "med0309",
+            "text": {
+              "status": "generated",
+              "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><div class=\"hapiHeaderText\"> Tylenol PM </div></div>"
+            },
+            "code": {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/sid/ndc",
+                  "code": "50580-506-02",
+                  "display": "Tylenol PM"
+                }
+              ]
+            }
+          }
+        ],
+        "identifier": [
+          {
+            "use": "official",
+            "system": "http://www.bmc.nl/portal/prescriptions",
+            "value": "12345689"
+          }
+        ],
+        "status": "active",
+        "intent": "order",
+        "medicationReference": {
+          "reference": "#med0309"
+        },
+        "subject": {
+          "reference": "Patient/1208",
+          "display": "Roshni Sahu"
+        },
+        "encounter": {
+          "reference": "Encounter/43",
+          "display": "encounter who leads to this prescription"
+        },
+        "authoredOn": "2015-01-15",
+        "requester": {
+          "reference": "Practitioner/1058",
+          "display": "Guru Practitioner"
+        },
+        "dosageInstruction": [
+          {
+            "sequence": 1,
+            "text": "Take 1-2 tablets once daily at bedtime as needed for restless legs",
+            "additionalInstruction": [
+              {
+                "text": "Take at bedtime"
+              }
+            ],
+            "timing": {
+              "repeat": {
+                "frequency": 1,
+                "period": 1,
+                "periodUnit": "d"
+              }
+            },
+            "asNeededCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "32914008",
+                  "display": "Restless Legs"
+                }
+              ]
+            },
+            "route": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "26643006",
+                  "display": "Oral Route"
+                }
+              ]
+            },
+            "doseAndRate": [
+              {
+                "type": {
+                  "coding": [
+                    {
+                      "system": "http://terminology.hl7.org/CodeSystem/dose-rate-type",
+                      "code": "ordered",
+                      "display": "Ordered"
+                    }
+                  ]
+                },
+                "doseRange": {
+                  "low": {
+                    "value": 1,
+                    "unit": "TAB",
+                    "system": "http://terminology.hl7.org/CodeSystem/v3-orderableDrugForm",
+                    "code": "TAB"
+                  },
+                  "high": {
+                    "value": 2,
+                    "unit": "TAB",
+                    "system": "http://terminology.hl7.org/CodeSystem/v3-orderableDrugForm",
+                    "code": "TAB"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    }
+  ]
+}
