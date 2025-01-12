@@ -5,11 +5,15 @@ import axios from "axios";
 const AllergyDashboard = () => {
   const [patientIds, setPatientIds] = useState([]);
   const [selectedPatient, setSelectedPatient] = useState("");
-  const [allergyData, setAllergyData] = useState(null);
+  const [allergyData, setAllergyData] = useState({
+    alerts: [],
+    extractedAllergies: [],
+    extractedMedications: [],
+    clinicalStatus: { resolved: 0, inactive: 0, active: 0 },
+  });
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Fetch unique patient IDs
     const fetchPatientIds = async () => {
       try {
         const response = await axios.get(
@@ -25,56 +29,55 @@ const AllergyDashboard = () => {
   }, []);
 
   useEffect(() => {
-    // Fetch allergy data for the selected patient
-    if (selectedPatient) {
-      const fetchAllergyData = async () => {
-        setLoading(true);
-        try {
-          const response = await axios.get(
-            `https://fhir-backend.vercel.app/api/allergy/${selectedPatient}`
-          );
-          const uniqueMedications = response.data.extractedMedications?.reduce(
-            (unique, medication) => {
-              if (!unique.some((item) => item.code === medication.code)) {
-                unique.push(medication);
-              }
-              return unique;
-            },
-            []
-          );
+    const fetchAllergyData = async () => {
+      if (!selectedPatient) return;
 
-          // Remove duplicates from extracted allergies and alerts
-          const uniqueAllergies = response.data.extractedAllergies?.reduce(
-            (unique, allergy) => {
-              if (!unique.some((item) => item.id === allergy.id)) {
-                unique.push(allergy);
-              }
-              return unique;
-            },
-            []
-          );
+      setLoading(true);
+      try {
+        const response = await axios.get(
+          `https://fhir-backend.vercel.app/api/allergy/${selectedPatient}`
+        );
 
-          const uniqueAlerts = [...new Set(response.data.alerts || [])];
+        const uniqueMedications = response.data.extractedMedications?.reduce(
+          (unique, medication) => {
+            if (!unique.some((item) => item.code === medication.code)) {
+              unique.push(medication);
+            }
+            return unique;
+          },
+          []
+        );
 
-          setAllergyData({
-            ...response.data,
-            extractedMedications: uniqueMedications || [],
-            extractedAllergies: uniqueAllergies || [],
-            alerts: uniqueAlerts,
-          });
+        const uniqueAllergies = response.data.extractedAllergies?.reduce(
+          (unique, allergy) => {
+            if (!unique.some((item) => item.id === allergy.id)) {
+              unique.push(allergy);
+            }
+            return unique;
+          },
+          []
+        );
 
-          renderChart(response.data.clinicalStatus);
-        } catch (error) {
-          console.error("Error fetching allergy data:", error);
-        }
-        setLoading(false);
-      };
-      fetchAllergyData();
-    }
+        const uniqueAlerts = [...new Set(response.data.alerts || [])];
+
+        setAllergyData({
+          ...response.data,
+          extractedMedications: uniqueMedications || [],
+          extractedAllergies: uniqueAllergies || [],
+          alerts: uniqueAlerts,
+        });
+
+        renderChart(response.data.clinicalStatus);
+      } catch (error) {
+        console.error("Error fetching allergy data:", error);
+      }
+      setLoading(false);
+    };
+
+    fetchAllergyData();
   }, [selectedPatient]);
 
   const renderChart = (clinicalStatus) => {
-    // Clear the previous chart
     d3.select("#chart").selectAll("*").remove();
 
     const data = [
@@ -180,7 +183,7 @@ const AllergyDashboard = () => {
             ))}
           </select>
 
-          {allergyData.alerts && (
+          {allergyData.alerts.length > 0 && (
             <div className="mt-5">
               <h3 className="text-lg font-semibold">Alerts</h3>
               <ul className="space-y-2">
@@ -196,7 +199,7 @@ const AllergyDashboard = () => {
             </div>
           )}
 
-          {allergyData && allergyData.extractedAllergies.length > 0 && (
+          {allergyData.extractedAllergies.length > 0 && (
             <div className="mt-5">
               <h3 className="text-lg font-semibold">Extracted Allergies</h3>
               <ul className="space-y-2">
@@ -221,7 +224,7 @@ const AllergyDashboard = () => {
           </h2>
           <div id="chart" className="w-full"></div>
 
-          {allergyData.extractedMedications?.length > 0 && (
+          {allergyData.extractedMedications.length > 0 && (
             <div className="mt-5">
               <h3 className="text-lg font-semibold">Medications</h3>
               <ul className="space-y-2">
@@ -249,7 +252,8 @@ const AllergyDashboard = () => {
                             {instruction.additionalInstruction?.join(", ") ||
                               "N/A"}
                             <br />
-                            <strong>Route:</strong> {instruction.route || "N/A"}
+                            <strong>Route:</strong>{" "}
+                            {instruction.route || "N/A"}
                             <br />
                             <strong>Dose Range:</strong>{" "}
                             {instruction.doseAndRate[0]?.doseRange
@@ -264,6 +268,7 @@ const AllergyDashboard = () => {
               </ul>
             </div>
           )}
+
         </div>
       </div>
     </div>
