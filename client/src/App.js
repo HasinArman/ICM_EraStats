@@ -201,7 +201,7 @@ const AllergyDashboard = () => {
 
           {allergyData.extractedAllergies.length > 0 && (
             <div className="mt-5">
-              <h3 className="text-lg font-semibold">Extracted Allergies</h3>
+              <h3 className="text-lg font-semibold"> Allergies</h3>
               <ul className="space-y-2">
                 {allergyData.extractedAllergies.map((allergy) => (
                   <li
