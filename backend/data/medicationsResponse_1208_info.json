@@ -2,13 +2,29 @@
   {
     "id": "30097",
     "status": "stopped",
-    "subject": "Patient/1208",
-    "authoredOn": "2015-01-15"
+    "intent": "order",
+    "subject": "Roshni Sahu",
+    "authoredOn": "2015-01-15",
+    "dosageInstruction": [
+      {
+        "text": "Take 1-2 tablets once daily at bedtime as needed for restless legs",
+        "route": "Oral Route",
+        "dose": "Unknown"
+      }
+    ]
   },
   {
     "id": "7148327",
     "status": "active",
-    "subject": "Patient/1208",
-    "authoredOn": "2015-01-15"
+    "intent": "order",
+    "subject": "Roshni Sahu",
+    "authoredOn": "2015-01-15",
+    "dosageInstruction": [
+      {
+        "text": "Take 1-2 tablets once daily at bedtime as needed for restless legs",
+        "route": "Oral Route",
+        "dose": "Unknown"
+      }
+    ]
   }
 ]
