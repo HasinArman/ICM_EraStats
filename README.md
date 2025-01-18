@@ -1,47 +1,115 @@
-# EraStats (Allergy and Intolerance Management
-)
+# EraStats (Condition Analysis)
 
-## *(To run, Enter "cd client" in the terminal)
 ## *(To run, Enter "npm start" in the terminal)
-
-## *FHIR data path- direct from fhir api "https://hapi.fhir.org/baseR4"
+## *FHIR data path- /public/data
 
 ### EraStats is an analytical tool designed to help users gain insights into the prevalence of various medical conditions over time. Users can select specific health conditions, such as depression or diabetes, and view statistics broken down by age, gender, and clinical status. This data-driven approach provides a comprehensive understanding of how different factors influence the incidence of diseases. EraStats is ideal for healthcare professionals, researchers, and individuals interested in historical and demographic trends in healthcare, as it allows them to identify patterns and potentially make data-informed decisions or predictions for public health initiatives.
 
 
 
-# Specific Problem to Solve: Allergy and Intolerance Management
-## For the user (a healthcare provider or patient), the specific problem being solved is preventing allergic reactions that could result from prescribing medications or consuming foods that the individual is allergic to. ## The user needs a way to quickly identify and alert them to potential allergies, ensuring that medications and foods are safe for the patient.
+
+# Problem - What?
+
+#@ Describe the problem and share insights into why it exists.
+### Certain health conditions disproportionately affect specific age groups and genders, but a lack of accessible tools limits understanding and early intervention.
+
+## What do your users feel, think, say, do when the problem occurs?
+### Users feel concerned and overwhelmed due to insufficient health awareness. They think about their susceptibility to diseases and often say they wish they knew more about their health risks. They tend to delay seeking medical advice due to a lack of information.
 
 
 
-# What Are They Trying to Get Done?
-## The user is trying to manage allergy information effectively. Specifically, they need to:
-### 1. Identify allergies: Quickly review the patient's known allergies (e.g., medication, food).
-### 2. Alert system: Get notified when a potentially harmful substance (like a medication or food) is prescribed or recommended based on the patient's allergy data.
-### 3. Track allergy history: Update, verify, and manage the patient’s allergy information over time.
+# Context - Why?
 
-# What Could Be Data to Manipulate When Interacting with One Record?
-## When interacting with a record of AllergyIntolerance (specifically for one patient), the following data could be manipulated:
-### 1. Substance (Allergen): The medication or food the patient is allergic to (e.g., penicillin, peanuts).
-### 2. Reaction Type: The specific allergic reaction (e.g., rash, anaphylaxis)
-### 4. Verification Status: Whether the allergy has been confirmed or not.
-### 5. Clinical Status: Whether the allergy is currently active or resolved.
-###6. Date of Allergy Onset: When the allergy was first identified or reported.
+## Define the context of the problem and the target group.
+### The problem is widespread in regions where health literacy and resources are low. Target groups include healthcare providers, researchers, and individuals seeking personalized health insights.
 
+## Provide data to show the scope of the issue.
+### For example, heart disease impacts males aged 45-60 the most, often during work hours. Similar trends are observed for other conditions based on gender and age.
+
+## Why is the world a better place if we tackle the issue?
+### With better tools for identifying at-risk groups, early interventions can save lives, reduce healthcare costs, and improve population health.
+
+
+# Solution - How?
+
+## Which features would a digital product need to solve the problem?
+### 1. A database of health conditions linked to age and gender statistics.
+### 2. An intuitive interface for users to select a condition and view insights.
+### 3. Visual data representation for age and gender-based trends.
+
+## How could this issue be tackled with other (non-technical) means?
+### 1. Health awareness campaigns to educate communities.
+### 2. Collaboration with healthcare institutions for targeted interventions.
+
+
+# Team & Implementation - Who?
+
+##Who is conducting the project and what are your roles?
+### 1. Data Analysis: Processing health data and identifying trends.
+### 2. Backend Development: Efficient and secure data storage and retrieval.
+### 3. Frontend Development: Building user-friendly interfaces.
+
+
+## Hardware & Data Acquisition:
+### Not applicable, as this is software-focused.
+
+## Data Analytics:
+### Apply descriptive statistics to analyze and display trends based on input conditions.
+
+## Backend & Security:
+###Data is securely stored in a cloud database, with encryption and role-based access.
+
+## Frontend & User Experience:
+### Users can easily input conditions and get tailored insights.
+
+
+### What next?
+
+## What do you need to achieve your objectives?
+### 1. Refined datasets to improve accuracy.
+### 2. User testing to optimize the interface and features.
+
+## What is the plan of action to get it done?
+### 1. Partner with health organizations for accurate data collection.
+### 2. Implement iterative testing cycles to improve the software's accuracy and usability.
+
+
+
+
+
+### The registration functionality is currently not operational because I did not integrate the Node.js backend to handle saving the data. If I were to add the backend, it would not work in the Codespace environment, as it does not fully support server-side Node.js execution in this setup. However, the login functionality works because it retrieves user data directly from a static JSON file instead of relying on a backend server.
 
 
 ## Register Page
-![Alt text](https://github.com/HasinArman/ICM_EraStats/blob/main/client/Screenshot%20(35).png)
+![Alt text](https://github.com/HasinArman/ICM_EraStats/blob/main/Screenshot%20(35).png)
 
 ## Login Page
-![Alt text](https://github.com/HasinArman/ICM_EraStats/blob/main/client/Screenshot%20(34).png)
+![Alt text](https://github.com/HasinArman/ICM_EraStats/blob/main/Screenshot%20(34).png)
 
 
 
 
 ## Home Page
 
-![Alt text](https://github.com/HasinArman/ICM_EraStats/blob/main/client/Screenshot%20(121).png)
+![Alt text](https://github.com/HasinArman/ICM_EraStats/blob/main/Screenshot%20(203).png)
 
 
+## Select Condition 
+
+![Alt text](https://github.com/HasinArman/ICM_EraStats/blob/main/Screenshot%20(204).png)
+
+## AllData Analysis in Line Chart
+
+![Alt text](https://github.com/HasinArman/ICM_EraStats/blob/main/Screenshot%20(205).png)
+
+## Age Analysis in Bar Chart
+
+![Alt text](https://github.com/HasinArman/ICM_EraStats/blob/main/Screenshot%20(206).png)
+
+## Gender Analysis in Pie Chart
+
+![Alt text](https://github.com/HasinArman/ICM_EraStats/blob/main/Screenshot%20(207).png)
+
+## Clinic Stat Analysis in Pie Chart
+
+![Alt text](https://github.com/HasinArman/ICM_EraStats/blob/main/Screenshot%20(208).png)
